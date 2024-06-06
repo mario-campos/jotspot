@@ -1,0 +1,7 @@
+name "plexlint"
+description "Plex media linter"
+authors "Mario Campos"
+copyright "Copyright © 2024, Mario Campos"
+license "MIT"
+dependency "d2sqlite3" version="~>1.0.0"
+subConfiguration "d2sqlite3" "all-included"

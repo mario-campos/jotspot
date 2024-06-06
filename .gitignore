@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/plexlint
+plexlint.so
+plexlint.dylib
+plexlint.dll
+plexlint.a
+plexlint.lib
+plexlint-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst

@@ -29,7 +29,7 @@ unittest
 	auto db = new PlexlintDatabase();
 	db.insertFile(1, "", "", 0, plex_id, plex_id, true, true, true, true, true, true, true, true, true, true);
 	db.insertFile(1, "", path, 1, plex_id, plex_id, false, true, true, false, true, true, false, true, true, false);
-	assert(db.queryPXLINT003(plex_id, plex_id).oneValue!string == path);
+	assert(checkPXLINT003(db, plex_id, plex_id).oneValue!string == path);
 }
 
 unittest
@@ -39,5 +39,5 @@ unittest
 	auto db = new PlexlintDatabase();
 	db.insertFile(1, "", "", 0, plex_id, plex_id, true, true, true, true, true, true, true, true, true, true);
 	db.insertFile(1, "", path, 1, 999u, 999u, true, true, true, true, true, true, false, false, false, false);
-	assert(db.queryPXLINT003(plex_id, plex_id).oneValue!string == path);
+	assert(checkPXLINT003(db, plex_id, plex_id).oneValue!string == path);
 }

@@ -23,5 +23,5 @@ unittest
 	auto db = new PlexlintDatabase();
 	db.insertFile(1, "", "", 0, 1000, 1000, true, true, true, true, true, true, true, true, true, true);
 	db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true, true);
-	assert(db.queryPXLINT001().oneValue!string == path);
+	assert(checkPXLINT001(db).oneValue!string == path);
 }

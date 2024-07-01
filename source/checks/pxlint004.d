@@ -28,5 +28,5 @@ unittest
     db.insertMovie(1, Movie("foo", 2020, ""));
     db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true, false);
     db.insertMovie(2, Movie("foo", 2021, ""));
-    assert(db.queryPXLINT004().oneValue!string == path);
+    assert(checkPXLINT004(db).oneValue!string == path);
 }

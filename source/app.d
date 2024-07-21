@@ -15,8 +15,8 @@ import std.typecons : Nullable;
 import d2sqlite3;
 
 import plexlint.database;
-import checks.pxlint001;
-import checks.pxlint002;
+import checks.PL001;
+import checks.PL002;
 
 PlexFile parsePlexMovieFile(string filename)
 {
@@ -138,8 +138,8 @@ void main(string[] args)
 	foreach (path; lib_movies_paths)
 		addAllMovieFiles(db, path);
 
-	foreach (Row row; checkPXLINT001(db))
+	foreach (Row row; checkPL001(db))
 		writeln("PXLINT001 ", row["file_path"].as!string);
-	foreach (Row row; checkPXLINT002(db))
+	foreach (Row row; checkPL002(db))
 		writeln("PXLINT002 ", row["file_path"].as!string);
 }

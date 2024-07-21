@@ -1,12 +1,12 @@
-module checks.pxlint004;
+module checks.PL004;
 
 import d2sqlite3;
 import plexlint.database;
 
-/// PXLINT004
+/// PL004
 ///
-/// PXLINT004 checks for movie files whose metadata does not match its directory.
-ResultRange checkPXLINT004(PlexlintDatabase db)
+/// PL004 checks for movie files whose metadata does not match its directory.
+ResultRange checkPL004(PlexlintDatabase db)
 {
     return db.conn.execute("
         SELECT f.file_path
@@ -28,5 +28,5 @@ unittest
     db.insertMovie(1, Movie("foo", 2020, ""));
     db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true, false);
     db.insertMovie(2, Movie("foo", 2021, ""));
-    assert(checkPXLINT004(db).oneValue!string == path);
+    assert(checkPL004(db).oneValue!string == path);
 }

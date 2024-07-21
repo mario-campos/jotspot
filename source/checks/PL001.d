@@ -1,14 +1,14 @@
-module checks.pxlint001;
+module checks.PL001;
 
 import d2sqlite3;
 import plexlint.database;
 
-/// PXLINT001
+/// PL001
 ///
-/// PXLINT001 checks for the existance of empty directories. Empty directories
+/// PL001 checks for the existance of empty directories. Empty directories
 /// serve no purpose to Plex and may only create the "illusion" of a legitimate
 /// movie in Plex.
-ResultRange checkPXLINT001(PlexlintDatabase db)
+ResultRange checkPL001(PlexlintDatabase db)
 {
     return db.conn.execute("
         SELECT d.file_path
@@ -23,5 +23,5 @@ unittest
 	auto db = new PlexlintDatabase();
 	db.insertFile(1, "", "", 0, 1000, 1000, true, true, true, true, true, true, true, true, true, true);
 	db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true, true);
-	assert(checkPXLINT001(db).oneValue!string == path);
+	assert(checkPL001(db).oneValue!string == path);
 }

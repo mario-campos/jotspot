@@ -1,0 +1,5 @@
+2024-07-21  Mario Campos  <mario.andres.campos@gmail.com>
+
+  * Initial release, v0.1.0, which includes 4 checks but only 2 (PL001, PL002) are enabled.
+  * Made the repository public.
+  * Added CHANGELOG.

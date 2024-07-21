@@ -139,7 +139,7 @@ void main(string[] args)
 		addAllMovieFiles(db, path);
 
 	foreach (Row row; checkPL001(db))
-		writeln("PXLINT001 ", row["file_path"].as!string);
+		writeln("PL001 ", row["file_path"].as!string);
 	foreach (Row row; checkPL002(db))
-		writeln("PXLINT002 ", row["file_path"].as!string);
+		writeln("PL002 ", row["file_path"].as!string);
 }

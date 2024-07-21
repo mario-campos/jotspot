@@ -6,8 +6,8 @@ It couldn't be easier to use plexlint! Once compiled, simply supply one or more 
 
 ```shell
 $ plexlint -m /path/to/movies
-PXLINT001  /path/to/movies/my_empty_folder
-PXLINT002  /path/to/movies/movie.mkv
+PL001  /path/to/movies/my_empty_folder
+PL002  /path/to/movies/movie.mkv
 ```
 
 The output is be a tab-separated value of two "columns": the first contains the check ID&mdash;it's meaning can be referenced at the [homepage](https://mario-campos.github.io/software/plexlint/). The second column contains the problematic movie file/folder to which the check is referring.

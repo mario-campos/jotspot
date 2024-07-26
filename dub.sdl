@@ -1,5 +1,5 @@
-name "plexlint"
-description "Plex media linter"
+name "jotspot"
+description "A command-line tool for linting media"
 authors "Mario Campos"
 copyright "Copyright © 2024, Mario Campos"
 license "MIT"

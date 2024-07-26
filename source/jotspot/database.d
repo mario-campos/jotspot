@@ -1,4 +1,4 @@
-module plexlint.database;
+module jotspot.database;
 
 import core.sys.posix.sys.stat;
 import d2sqlite3;
@@ -26,7 +26,7 @@ struct UnknownFile
 {
 }
 
-class PlexlintDatabase
+class JotspotDatabase
 {
 	Database conn;
 	Statement psInsertFile;

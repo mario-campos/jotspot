@@ -14,9 +14,9 @@ import std.typecons : Nullable;
 
 import d2sqlite3;
 
-import plexlint.database;
-import checks.PL001;
-import checks.PL002;
+import jotspot.database;
+import checks.jot001;
+import checks.jot002;
 
 PlexFile parsePlexMovieFile(string filename)
 {
@@ -89,7 +89,7 @@ unittest
 	);
 }
 
-void addAllMovieFiles(PlexlintDatabase db, string path, long directory_id = 1, int depth = 0)
+void addAllMovieFiles(JotspotDatabase db, string path, long directory_id = 1, int depth = 0)
 {
 	directory_id = db.insertFileFromDirEntry(DirEntry(path), directory_id, depth++);
 	foreach (DirEntry de; dirEntries(path, SpanMode.shallow))
@@ -121,25 +121,25 @@ void main(string[] args)
 	if (opts.helpWanted)
 	{
 		writeln(
-			"usage: plexlint -m|--movies PATH\n",
-			"       plexlint -v|--version\n",
-			"       plexlint -h|--help"
+			"usage: jotspot -m|--movies PATH\n",
+			"       jotspot -v|--version\n",
+			"       jotspot -h|--help"
 		);
 		exit(0);
 	}
 
 	if (opt_version)
 	{
-		writeln("plexlint-0.1.0");
+		writeln("jotspot-0.1.2");
 		exit(0);
 	}
 
-	auto db = new PlexlintDatabase();
+	auto db = new JotspotDatabase();
 	foreach (path; lib_movies_paths)
 		addAllMovieFiles(db, path);
 
-	foreach (Row row; checkPL001(db))
-		writeln("PL001 ", row["file_path"].as!string);
-	foreach (Row row; checkPL002(db))
-		writeln("PL002 ", row["file_path"].as!string);
+	foreach (Row row; checkJot001(db))
+		writeln("jot001 ", row["file_path"].as!string);
+	foreach (Row row; checkJot002(db))
+		writeln("jot002 ", row["file_path"].as!string);
 }

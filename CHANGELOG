@@ -1,3 +1,8 @@
+2024-07-26  Mario Campos  <mario.andres.campos@gmail.com>
+
+  * Renamed the entire project from "plexlint" to "jotspot" to be in compliance with the Plex trademark policy (https://www.plex.tv/about/privacy-legal/plex-trademarks-and-guidelines/). For those curious, a "jot" is "the smallest bit" or an iota. So, to find tiny problems in large collections is to spot a jot ;)
+  * Released v0.1.2
+
 2024-07-21  Mario Campos  <mario.andres.campos@gmail.com>
 
   * Fixed a bug in the output of plexlint. plexlint was still outputting the old format of the output, which was not compatible with the new format.

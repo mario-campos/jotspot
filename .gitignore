@@ -3,6 +3,7 @@ docs.json
 __dummy.html
 docs/
 /jotspot
+/jotspot-test-library
 jotspot.so
 jotspot.dylib
 jotspot.dll

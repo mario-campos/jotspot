@@ -5,39 +5,41 @@ import jotspot.database;
 
 /// jot003
 ///
-/// jot003 checks for movie files that are not readable by the Plex user.
-ResultRange checkJot003(JotspotDatabase db, uint plex_uid, uint plex_gid)
+/// jot003 checks for files that have a permission other than 0444.
+ResultRange checkJot003(JotspotDatabase db)
 {
-    auto statement = db.conn.prepare("
-        SELECT file_path FROM files WHERE NOT (
-            (owner_id = :uid AND is_owner_readable)
-            OR
-            (group_id = :gid AND is_group_readable)
-            OR
-            is_other_readable
+    return db.conn.execute("
+        SELECT file_path
+        FROM files
+        WHERE NOT is_directory AND
+        NOT (
+            is_owner_readable AND
+            NOT is_owner_writable AND
+            NOT is_owner_executable AND
+            is_group_readable AND
+            NOT is_group_writable AND
+            NOT is_group_executable AND
+            is_other_readable AND
+            NOT is_other_writable AND
+            NOT is_other_executable
         )
     ");
-    statement.bind(":uid", plex_uid);
-    statement.bind(":gid", plex_gid);
-    return statement.execute();
 }
 
 unittest
 {
 	auto path = "/foo";
-	auto plex_id = 1000;
 	auto db = new JotspotDatabase();
-	db.insertFile(1, "", "", 0, plex_id, plex_id, true, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", path, 1, plex_id, plex_id, false, true, true, false, true, true, false, true, true, false);
-	assert(checkJot003(db, plex_id, plex_id).oneValue!string == path);
+	db.insertFile(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true, true);
+	db.insertFile(1, "", path, 1, 0, 0, false, false, false, false, false, false, false, false, false, false);
+	assert(checkJot003(db).oneValue!string == path);
 }
 
+// Tests that a file with permission 0444 is NOT returned by checkJot003.
 unittest
 {
-	auto path = "/foo";
-	auto plex_id = 1000;
 	auto db = new JotspotDatabase();
-	db.insertFile(1, "", "", 0, plex_id, plex_id, true, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", path, 1, 999u, 999u, true, true, true, true, true, true, false, false, false, false);
-	assert(checkJot003(db, plex_id, plex_id).oneValue!string == path);
+	db.insertFile(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true, true);
+	db.insertFile(1, "", "", 1, 0, 0, true, false, false, true, false, false, true, false, false, false);
+	assert(checkJot003(db).empty);
 }

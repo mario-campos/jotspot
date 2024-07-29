@@ -24,9 +24,9 @@ unittest
 {
     auto path = "/foo/bar/qux.mkv";
     auto db = new JotspotDatabase();
-    db.insertFile(1, "", "", 0, 1000, 1000, true, true, true, true, true, true, true, true, true, true);
+    db.insertDirectory(1, "", "", 0, 1000, 1000, true, true, true, true, true, true, true, true, true);
     db.insertMovie(1, Movie("foo", 2020, ""));
-    db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true, false);
+    db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true);
     db.insertMovie(2, Movie("foo", 2021, ""));
     assert(checkJot004(db).oneValue!string == path);
 }

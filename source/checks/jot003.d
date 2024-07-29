@@ -30,8 +30,8 @@ unittest
 {
 	auto path = "/foo";
 	auto db = new JotspotDatabase();
-	db.insertFile(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", path, 1, 0, 0, false, false, false, false, false, false, false, false, false, false);
+	db.insertDirectory(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true);
+	db.insertFile(1, "", path, 1, 0, 0, false, false, false, false, false, false, false, false, false);
 	assert(checkJot003(db).oneValue!string == path);
 }
 
@@ -39,7 +39,7 @@ unittest
 unittest
 {
 	auto db = new JotspotDatabase();
-	db.insertFile(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", "", 1, 0, 0, true, false, false, true, false, false, true, false, false, false);
+	db.insertDirectory(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true);
+	db.insertFile(1, "", "", 1, 0, 0, true, false, false, true, false, false, true, false, false);
 	assert(checkJot003(db).empty);
 }

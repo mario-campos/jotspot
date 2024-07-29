@@ -91,14 +91,14 @@ unittest
 
 void addAllMovieFiles(JotspotDatabase db, string path, long directory_id = 1, int depth = 0)
 {
-	directory_id = db.insertFileFromDirEntry(DirEntry(path), directory_id, depth++);
+	directory_id = db.insertFileRecordFromDirEntry(DirEntry(path), directory_id, depth++);
 	foreach (DirEntry de; dirEntries(path, SpanMode.shallow))
 	{
 		if (de.isDir)
 			addAllMovieFiles(db, de.name, directory_id, depth);
 		else
 		{
-			auto file_id = db.insertFileFromDirEntry(de, directory_id, depth);
+			auto file_id = db.insertFileRecordFromDirEntry(de, directory_id, depth);
 			parsePlexMovieFile(baseName(de.name)).match!(
 				(Movie m) => db.insertMovie(file_id, m),
 				(MovieExtra me) => db.insertMovieExtra(file_id, me),

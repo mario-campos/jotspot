@@ -107,9 +107,9 @@ class JotspotDatabase
 		");
 	}
 
-	long insertFileFromDirEntry(DirEntry de, long directoryID, uint fileDepth)
+	long insertFileRecordFromDirEntry(DirEntry de, long directoryID, uint fileDepth)
 	{
-		return insertFile(
+		return insertFileRecord(
 			directoryID,
 			baseName(de.name),
 			de.name,
@@ -129,7 +129,7 @@ class JotspotDatabase
 		);
 	}
 
-	long insertFile(
+	long insertFileRecord(
 		long directoryID,
 		string fileName,
 		string filePath,
@@ -167,6 +167,80 @@ class JotspotDatabase
 		psInsertFile.bind(":is_directory", isDirectory);
 		psInsertFile.execute();
 		return conn.lastInsertRowid();
+	}
+
+	long insertDirectory(
+		long directoryID,
+		string fileName,
+		string filePath,
+		int fileDepth,
+		uint ownerID,
+		uint groupID,
+		bool isOwnerReadable,
+		bool isOwnerWritable,
+		bool isOwnerExecutable,
+		bool isGroupReadable,
+		bool isGroupWritable,
+		bool isGroupExecutable,
+		bool isOtherReadable,
+		bool isOtherWritable,
+		bool isOtherExecutable)
+	{
+		return insertFileRecord(
+			directoryID,
+			fileName,
+			filePath,
+			fileDepth,
+			ownerID,
+			groupID,
+			isOwnerReadable,
+			isOwnerWritable,
+			isOwnerExecutable,
+			isGroupReadable,
+			isGroupWritable,
+			isGroupExecutable,
+			isOtherReadable,
+			isOtherWritable,
+			isOtherExecutable,
+			true,
+		);
+	}
+
+	long insertFile(
+		long directoryID,
+		string fileName,
+		string filePath,
+		int fileDepth,
+		uint ownerID,
+		uint groupID,
+		bool isOwnerReadable,
+		bool isOwnerWritable,
+		bool isOwnerExecutable,
+		bool isGroupReadable,
+		bool isGroupWritable,
+		bool isGroupExecutable,
+		bool isOtherReadable,
+		bool isOtherWritable,
+		bool isOtherExecutable)
+	{
+		return insertFileRecord(
+			directoryID,
+			fileName,
+			filePath,
+			fileDepth,
+			ownerID,
+			groupID,
+			isOwnerReadable,
+			isOwnerWritable,
+			isOwnerExecutable,
+			isGroupReadable,
+			isGroupWritable,
+			isGroupExecutable,
+			isOtherReadable,
+			isOtherWritable,
+			isOtherExecutable,
+			false,
+		);
 	}
 
 	long insertMovie(long file_id, Movie m)

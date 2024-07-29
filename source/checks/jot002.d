@@ -12,8 +12,8 @@ import jotspot.database;
 /// Source: https://support.plex.tv/articles/naming-and-organizing-your-movie-media-files/
 ResultRange checkJot002(JotspotDatabase db)
 {
-    return db.conn.execute(
-        "SELECT file_path FROM files WHERE NOT is_directory AND file_depth = 1");
+	return db.conn.execute(
+		"SELECT file_path FROM files WHERE NOT is_directory AND file_depth = 1");
 }
 
 unittest

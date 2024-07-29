@@ -8,22 +8,22 @@ import jotspot.database;
 /// jot003 checks for files that have a permission other than 0444.
 ResultRange checkJot003(JotspotDatabase db)
 {
-    return db.conn.execute("
-        SELECT file_path
-        FROM files
-        WHERE NOT is_directory AND
-        NOT (
-            is_owner_readable AND
-            NOT is_owner_writable AND
-            NOT is_owner_executable AND
-            is_group_readable AND
-            NOT is_group_writable AND
-            NOT is_group_executable AND
-            is_other_readable AND
-            NOT is_other_writable AND
-            NOT is_other_executable
-        )
-    ");
+	return db.conn.execute("
+		SELECT file_path
+		FROM files
+		WHERE NOT is_directory AND
+		NOT (
+			is_owner_readable AND
+			NOT is_owner_writable AND
+			NOT is_owner_executable AND
+			is_group_readable AND
+			NOT is_group_writable AND
+			NOT is_group_executable AND
+			is_other_readable AND
+			NOT is_other_writable AND
+			NOT is_other_executable
+		)
+	");
 }
 
 unittest

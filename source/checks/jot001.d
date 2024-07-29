@@ -10,11 +10,11 @@ import jotspot.database;
 /// movie in Plex.
 ResultRange checkJot001(JotspotDatabase db)
 {
-    return db.conn.execute("
-        SELECT d.file_path
-        FROM files d LEFT JOIN files f ON d.file_id = f.directory_id
-        WHERE d.is_directory AND f.directory_id IS NULL
-    ");
+	return db.conn.execute("
+		SELECT d.file_path
+		FROM files d LEFT JOIN files f ON d.file_id = f.directory_id
+		WHERE d.is_directory AND f.directory_id IS NULL
+	");
 }
 
 unittest

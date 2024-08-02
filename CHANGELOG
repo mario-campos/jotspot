@@ -1,3 +1,9 @@
+2024-08-01  Mario Campos  <mario.andres.campos@gmail.com>
+
+  * Split jot003. which searched for files and directories with funky permissions, into two jots: one for files (003) and one for directories (004). This was necessary to keep the unit tests minimal and relevant. It also helped to avoid any nasty SQL queries.
+  * The introduction of a new jot004 meant that the former jot004 had to be renamed to jot005 now.
+  * The `JotspotDatabase` was refactored a bit to avoid having to pass nine booleans everytime you insert a file/directory. This makes it easier to write readable unit tests, which should help my use of TDD. It also meant that I can pass the permissions as a single value that can be chosen randomly.
+
 2024-07-26  Mario Campos  <mario.andres.campos@gmail.com>
 
   * Renamed the entire project from "plexlint" to "jotspot" to be in compliance with the Plex trademark policy (https://www.plex.tv/about/privacy-legal/plex-trademarks-and-guidelines/). For those curious, a "jot" is "the smallest bit" or an iota. So, to find tiny problems in large collections is to spot a jot ;)

@@ -1,5 +1,9 @@
 module checks.jot003;
 
+import core.sys.posix.sys.stat;
+import std.conv;
+import std.range;
+import std.random;
 import d2sqlite3;
 import jotspot.database;
 
@@ -28,10 +32,11 @@ ResultRange checkJot003(JotspotDatabase db)
 
 unittest
 {
+	auto wrongPermission = chain(iota(std.conv.octal!"444"), iota(std.conv.octal!"445", std.conv.octal!"777")).choice();
 	auto path = "/foo";
 	auto db = new JotspotDatabase();
-	db.insertDirectory(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", path, 1, 0, 0, false, false, false, false, false, false, false, false, false);
+	db.insertDirectory(1, "", "", 0, 1000, 1000);
+	db.insertFile(1, "", path, 1, 1000, 1000, wrongPermission);
 	assert(checkJot003(db).oneValue!string == path);
 }
 
@@ -39,7 +44,7 @@ unittest
 unittest
 {
 	auto db = new JotspotDatabase();
-	db.insertDirectory(1, "", "", 0, 0, 0, true, true, true, true, true, true, true, true, true);
-	db.insertFile(1, "", "", 1, 0, 0, true, false, false, true, false, false, true, false, false);
+	db.insertDirectory(1, "", "", 0, 1000, 1000);
+	db.insertFile(1, "", "", 1, 1000, 1000, S_IRUSR | S_IRGRP | S_IROTH);
 	assert(checkJot003(db).empty);
 }

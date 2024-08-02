@@ -176,15 +176,7 @@ class JotspotDatabase
 		int fileDepth,
 		uint ownerID,
 		uint groupID,
-		bool isOwnerReadable,
-		bool isOwnerWritable,
-		bool isOwnerExecutable,
-		bool isGroupReadable,
-		bool isGroupWritable,
-		bool isGroupExecutable,
-		bool isOtherReadable,
-		bool isOtherWritable,
-		bool isOtherExecutable)
+		uint permissions = 0)
 	{
 		return insertFileRecord(
 			directoryID,
@@ -193,15 +185,15 @@ class JotspotDatabase
 			fileDepth,
 			ownerID,
 			groupID,
-			isOwnerReadable,
-			isOwnerWritable,
-			isOwnerExecutable,
-			isGroupReadable,
-			isGroupWritable,
-			isGroupExecutable,
-			isOtherReadable,
-			isOtherWritable,
-			isOtherExecutable,
+			cast(bool)(permissions & S_IRUSR),
+			cast(bool)(permissions & S_IWUSR),
+			cast(bool)(permissions & S_IXUSR),
+			cast(bool)(permissions & S_IRGRP),
+			cast(bool)(permissions & S_IWGRP),
+			cast(bool)(permissions & S_IXGRP),
+			cast(bool)(permissions & S_IROTH),
+			cast(bool)(permissions & S_IWOTH),
+			cast(bool)(permissions & S_IXOTH),
 			true,
 		);
 	}
@@ -213,15 +205,7 @@ class JotspotDatabase
 		int fileDepth,
 		uint ownerID,
 		uint groupID,
-		bool isOwnerReadable,
-		bool isOwnerWritable,
-		bool isOwnerExecutable,
-		bool isGroupReadable,
-		bool isGroupWritable,
-		bool isGroupExecutable,
-		bool isOtherReadable,
-		bool isOtherWritable,
-		bool isOtherExecutable)
+		uint permissions = 0)
 	{
 		return insertFileRecord(
 			directoryID,
@@ -230,15 +214,15 @@ class JotspotDatabase
 			fileDepth,
 			ownerID,
 			groupID,
-			isOwnerReadable,
-			isOwnerWritable,
-			isOwnerExecutable,
-			isGroupReadable,
-			isGroupWritable,
-			isGroupExecutable,
-			isOtherReadable,
-			isOtherWritable,
-			isOtherExecutable,
+			cast(bool)(permissions & S_IRUSR),
+			cast(bool)(permissions & S_IWUSR),
+			cast(bool)(permissions & S_IXUSR),
+			cast(bool)(permissions & S_IRGRP),
+			cast(bool)(permissions & S_IWGRP),
+			cast(bool)(permissions & S_IXGRP),
+			cast(bool)(permissions & S_IROTH),
+			cast(bool)(permissions & S_IWOTH),
+			cast(bool)(permissions & S_IXOTH),
 			false,
 		);
 	}

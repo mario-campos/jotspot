@@ -21,7 +21,7 @@ unittest
 {
 	auto path = "/foo";
 	auto db = new JotspotDatabase();
-	db.insertDirectory(1, "", "", 0, 1000, 1000, true, true, true, true, true, true, true, true, true);
-	db.insertDirectory(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true);
+	db.insertDirectory(1, "", "", 0, 1000, 1000);
+	db.insertDirectory(1, "", path, 1, 1000, 1000);
 	assert(checkJot001(db).oneValue!string == path);
 }

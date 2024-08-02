@@ -20,6 +20,6 @@ unittest
 {
 	auto path = "/foo";
 	auto db = new JotspotDatabase();
-	db.insertFile(1, "", path, 1, 1000, 1000, true, true, true, true, true, true, true, true, true);
+	db.insertFile(1, "", path, 1, 1000, 1000);
 	assert(checkJot002(db).oneValue!string == path);
 }
